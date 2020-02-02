@@ -181,15 +181,12 @@ def split_sentences(txt):
 
 	return sents
 
-
-
-
 def main(file_name):
 	## read input text from file
 	with open(file_name, "r", encoding="utf8") as f:
 		txt = " ".join([line.strip(" \n") for line in f])
 
-	sents = split_sentences(txt)
+	sents = split_sentences(txt.lower())
 
 	## initialize models
 	excluded_chars = ".,!?\"'-"
@@ -198,20 +195,6 @@ def main(file_name):
 	mlm = MLMReplacer(model_name="bert-base-uncased")
 	word_replacer_mlm = WordReplacer(mlm, get_synonyms, excluded=excluded_chars)
 
-
-	# sents = txt.split('.?!')
-	# sents = [
-	# 	"could I get some water please?",
-	# 	"the weather is jolly fine today.",
-	# 	"wow you really aced it in that test.",
-	# 	"are you mad or are you just stupid?",
-	# 	"kant was a great reader and writer.",
-	# 	"the bathroom has never been cleaner.",
-	# 	"trump is a giant asshole!",
-	# 	"please don't come with those apologies now!",
-	# 	"starcraft is definitely better than warcraft.",
-	# 	"why are you not coming to your senses young man?!",
-	# ]
 	sents_mut = []
 	for s in sents:
 		# print(s)
