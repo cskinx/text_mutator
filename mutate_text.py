@@ -155,7 +155,7 @@ def mutate_sentence(wreplacers, sent):
 				word_span = get_word_span(sent_stripped, word_ind)
 				new_sent = wreplacer.replace_word(newest_sent, word_span)
 				if new_sent not in sent_hist:
-					print(f"\t{new_sent}")
+					# print(f"\t{new_sent}")
 					newest_sent = new_sent
 					sent_hist.append(new_sent)
 					has_changed = True
@@ -177,7 +177,6 @@ def split_sentences(txt):
 			sents.append(txt[sent_start_ind:char_ind].strip())
 			sent_start_ind = char_ind + 1
 		in_punctuation = char_is_punct
-
 
 	return sents
 
@@ -201,7 +200,6 @@ def main(file_name):
 		mut = mutate_sentence([word_replacer_mlm, word_replacer_fb], s)
 		sents_mut.append(mut)
 
-	print()
 	print(" ".join(sents_mut))
 
 if __name__ == '__main__':
