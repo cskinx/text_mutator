@@ -189,15 +189,21 @@ def main(file_name):
 
 	## initialize models
 	excluded_chars = ".,!?\"'-"
-	fb = FBReplacer(model_name="bert-base-uncased")
+	# bert_model = "bert-base-uncased"
+	bert_model = "bert-large-uncased"
+	fb = FBReplacer(model_name=bert_model)
 	word_replacer_fb = WordReplacer(fb, get_synonyms, excluded=excluded_chars)
-	mlm = MLMReplacer(model_name="bert-base-uncased")
-	word_replacer_mlm = WordReplacer(mlm, get_synonyms, excluded=excluded_chars)
+	# mlm = MLMReplacer(model_name=bert_model)
+	# word_replacer_mlm = WordReplacer(mlm, get_synonyms, excluded=excluded_chars)
 
+	replacers = [
+		word_replacer_fb,
+		# word_replacer_mlm,
+	]
 	sents_mut = []
 	for s in sents:
 		# print(s)
-		mut = mutate_sentence([word_replacer_mlm, word_replacer_fb], s)
+		mut = mutate_sentence(replacers, s)
 		sents_mut.append(mut)
 
 	print(" ".join(sents_mut))
