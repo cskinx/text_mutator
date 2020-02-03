@@ -157,7 +157,7 @@ def mutate_sentence(wreplacers, sent):
                 word_span = get_word_span(sent_stripped, word_ind)
                 new_sent = wreplacer.replace_word(newest_sent, word_span)
                 if new_sent not in sent_hist:
-                    # print(f"\t{new_sent}")
+                    print(f"\t{new_sent}")
                     newest_sent = new_sent
                     sent_hist.append(new_sent)
                     has_changed = True
